@@ -1,0 +1,18 @@
+# Core Packages
+scrapy
+sphobjinv
+
+# Code Style
+black
+flake8
+flake8-bugbear
+isort
+mypy
+pylint
+rope
+
+# Tests
+pytest
+pytest-cov
+tox
+# git+https://github.com/thisch/pytest-sphinx.git
