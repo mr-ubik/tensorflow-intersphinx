@@ -1,4 +1,4 @@
-"""Simple Spider for scraping the TensorFlow Documentation."""
+"""Simple Spider for scraping the TensorFlow (Probability) Documentation."""
 
 from typing import Dict, Iterable
 
@@ -20,7 +20,7 @@ class TensorFlowDocSpider(scrapy.Spider):
     @staticmethod
     def _parse_symbols_index(response) -> Iterable[str]:
         """
-        Extract URI of each TensorFlow symbols.
+        Extract URI of each TensorFlow (Probability) symbols.
 
         Args:
             response: PLACEHOLDER.
@@ -56,7 +56,10 @@ class TensorFlowDocSpider(scrapy.Spider):
         name_query = "//h1/text()"
         name = response.xpath(name_query).get()
 
-        if url == "https://www.tensorflow.org/api_docs/python/tf":
+        if url in (
+            "https://www.tensorflow.org/api_docs/python/tf",
+            "https://www.tensorflow.org/probability/api_docs/python/tfp",
+        ):
             return {"name": name, "url": url, "role": "package"}
 
         section_query = "//h2/text()"
@@ -72,3 +75,8 @@ class TensorFlowDocSpider(scrapy.Spider):
             role = "function"
 
         return {"name": name, "url": url, "role": role}
+
+
+class TensorFlowProbabilityDocSpider(TensorFlowDocSpider):
+    name = "tfp_docs"
+    start_urls = ["https://www.tensorflow.org/probability/api_docs/python"]

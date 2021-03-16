@@ -6,14 +6,20 @@ TensorFlow Intersphinx
 
 ----
 
-This repository contains the Sphinx Inventory of the TensorFlow 2.0 API together
+This repository contains the Sphinx Inventory of the TensorFlow 2.4 API and the TensorFlow Probability 0.12 API together
 with the scraper and conversion script used to generate it.
 
 Intersphinx Usage
 -----------------
 
-Add the following line inside your Sphinx Intersphinx configuration:
-``"tensorflow": ("https://www.tensorflow.org/api_docs/python", "https://github.com/mr-ubik/tensorflow-intersphinx/raw/master/tf2_py_objects.inv")``
+Add the following line inside the ``intersphinx_mapping`` setting in your Sphinx configuration (``conf.py``) if you want to use this repository's GitHub-hosted Inventory:
+``"tensorflow": ("https://www.tensorflow.org/api_docs/python", "https://github.com/GPflow/tensorflow-intersphinx/raw/master/tf2_py_objects.inv")``
+Or use the following line for having your own copy locally relative to your Sphinx ``conf.py``:
+``"tensorflow": ("https://www.tensorflow.org/api_docs/python", "tf2_py_objects.inv")``
+For TensorFlow Probability, use (GitHub-hosted)
+``"tensorflow_probability": ("https://www.tensorflow.org/probability/api_docs/python", "https://github.com/GPflow/tensorflow-intersphinx/raw/master/tfp_py_objects.inv")``
+or (locally)
+``"tensorflow_probability": ("https://www.tensorflow.org/probability/api_docs/python", "tfp_py_objects.inv")``
 
 **Example**
 
@@ -21,12 +27,15 @@ Add the following line inside your Sphinx Intersphinx configuration:
 
     # Example configuration for intersphinx: refer to the Python standard library.
     intersphinx_mapping = {
-        "flask": ("http://flask.pocoo.org/docs/1.0/", None),
-        "numpy": ("https://docs.scipy.org/doc/numpy/", None),
-        "python": ("https://docs.python.org/", None),
+        "numpy": ("https://numpy.org/doc/stable/", None),
+        "python": ("https://docs.python.org/3/", None),
         "tensorflow": (
             "https://www.tensorflow.org/api_docs/python",
-            "https://github.com/mr-ubik/tensorflow-intersphinx/raw/master/tf2_py_objects.inv",
+            "https://github.com/GPflow/tensorflow-intersphinx/raw/master/tf2_py_objects.inv"
+        ),
+        "tensorflow_probability": (
+            "https://www.tensorflow.org/probability/api_docs/python",
+            "https://github.com/GPflow/tensorflow-intersphinx/raw/master/tfp_py_objects.inv"
         ),
     }
 
