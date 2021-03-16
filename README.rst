@@ -12,14 +12,35 @@ with the scraper and conversion script used to generate it.
 Intersphinx Usage
 -----------------
 
-Add the following line inside the ``intersphinx_mapping`` setting in your Sphinx configuration (``conf.py``) if you want to use this repository's GitHub-hosted Inventory:
-``"tensorflow": ("https://www.tensorflow.org/api_docs/python", "https://github.com/GPflow/tensorflow-intersphinx/raw/master/tf2_py_objects.inv")``
-Or use the following line for having your own copy locally relative to your Sphinx ``conf.py``:
-``"tensorflow": ("https://www.tensorflow.org/api_docs/python", "tf2_py_objects.inv")``
-For TensorFlow Probability, use (GitHub-hosted)
-``"tensorflow_probability": ("https://www.tensorflow.org/probability/api_docs/python", "https://github.com/GPflow/tensorflow-intersphinx/raw/master/tfp_py_objects.inv")``
-or (locally)
-``"tensorflow_probability": ("https://www.tensorflow.org/probability/api_docs/python", "tfp_py_objects.inv")``
+To enable these intersphinx inventories in your Sphinx documentation, add the following items inside the ``intersphinx_mapping`` dictionary in your Sphinx configuration (*conf.py*).
+
+For TensorFlow,
+
+* GitHub-hosted:
+
+  .. code:: python
+
+      "tensorflow": ("https://www.tensorflow.org/api_docs/python", "https://github.com/GPflow/tensorflow-intersphinx/raw/master/tf2_py_objects.inv")
+
+* local copy (relative to *conf.py*):
+
+  .. code:: python
+
+      "tensorflow": ("https://www.tensorflow.org/api_docs/python", "tf2_py_objects.inv")
+
+For TensorFlow Probability,
+
+* GitHub-hosted:
+  
+  .. code:: python
+      
+      "tensorflow_probability": ("https://www.tensorflow.org/probability/api_docs/python", "https://github.com/GPflow/tensorflow-intersphinx/raw/master/tfp_py_objects.inv")
+
+* local copy (relative to *conf.py*):
+
+  .. code:: python
+
+      "tensorflow_probability": ("https://www.tensorflow.org/probability/api_docs/python", "tfp_py_objects.inv")
 
 **Example**
 
