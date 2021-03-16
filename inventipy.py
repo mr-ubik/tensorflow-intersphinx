@@ -30,14 +30,14 @@ def add_to_inventory(inv, symbol):
     role = symbol["role"]
 
     # Intersphinx has no "package" role, we convert it to "module" -> :py:module:`tf.keras`
-    if role == "pacakage":
+    if role == "package":
         role = "module"
 
     print(name, uri, role)
 
     inv.objects.append(
         soi.DataObjStr(
-            uri=uri, name=name, domain="py", role=role, priority="1", dispname="-"
+            uri=uri, name=name, domain="py", role=role, priority="1", dispname=name
         )
     )
 

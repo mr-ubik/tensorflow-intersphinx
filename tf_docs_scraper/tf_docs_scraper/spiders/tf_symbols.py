@@ -53,18 +53,19 @@ class TensorFlowDocSpider(scrapy.Spider):
         """
         url = response.url
 
-        if response.url == "https://www.tensorflow.org/api_docs/python/tf":
-            return "package"
-
         name_query = "//h1/text()"
         name = response.xpath(name_query).get()
 
-        class_selector = response.xpath("//h2/text()").get()
+        if url == "https://www.tensorflow.org/api_docs/python/tf":
+            return {"name": name, "url": url, "role": "package"}
+
+        section_query = "//h2/text()"
+        sections = response.xpath(section_query).getall()
 
         if "Module" in name.split(": "):
             role = "module"
             name = name.split(": ")[-1]
-        elif class_selector == "Class ":
+        elif "Attributes" in sections or "Methods" in sections:
             role = "class"
         else:
             # If the object is not a Module or a Class then it is a function.
