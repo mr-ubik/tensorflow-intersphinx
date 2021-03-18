@@ -57,6 +57,18 @@ def add_to_inventory(inv, symbol, common_url):
                 dispname=name,
             )
         )
+    elif name.startswith("tfp."):
+        other_name = "tensorflow_probability." + name[4:]
+        inv.objects.append(
+            soi.DataObjStr(
+                uri=uri,
+                name=other_name,
+                domain="py",
+                role=role,
+                priority="1",
+                dispname=name,
+            )
+        )
 
 
 if __name__ == "__main__":
