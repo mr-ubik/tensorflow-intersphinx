@@ -1,4 +1,4 @@
-"""Simple Spider for scraping the TensorFlow Documentation."""
+"""Simple Spider for scraping the TensorFlow (Probability) Documentation."""
 
 from typing import Dict, Iterable
 
@@ -20,7 +20,7 @@ class TensorFlowDocSpider(scrapy.Spider):
     @staticmethod
     def _parse_symbols_index(response) -> Iterable[str]:
         """
-        Extract URI of each TensorFlow symbols.
+        Extract URI of each TensorFlow (Probability) symbols.
 
         Args:
             response: PLACEHOLDER.
@@ -53,21 +53,30 @@ class TensorFlowDocSpider(scrapy.Spider):
         """
         url = response.url
 
-        if response.url == "https://www.tensorflow.org/api_docs/python/tf":
-            return "package"
-
         name_query = "//h1/text()"
         name = response.xpath(name_query).get()
 
-        class_selector = response.xpath("//h2/text()").get()
+        if url in (
+            "https://www.tensorflow.org/api_docs/python/tf",
+            "https://www.tensorflow.org/probability/api_docs/python/tfp",
+        ):
+            return {"name": name, "url": url, "role": "package"}
+
+        section_query = "//h2/text()"
+        sections = response.xpath(section_query).getall()
 
         if "Module" in name.split(": "):
             role = "module"
             name = name.split(": ")[-1]
-        elif class_selector == "Class ":
+        elif "Attributes" in sections or "Methods" in sections:
             role = "class"
         else:
             # If the object is not a Module or a Class then it is a function.
             role = "function"
 
         return {"name": name, "url": url, "role": role}
+
+
+class TensorFlowProbabilityDocSpider(TensorFlowDocSpider):
+    name = "tfp_docs"
+    start_urls = ["https://www.tensorflow.org/probability/api_docs/python"]

@@ -6,14 +6,41 @@ TensorFlow Intersphinx
 
 ----
 
-This repository contains the Sphinx Inventory of the TensorFlow 2.0 API together
+This repository contains the Sphinx Inventory of the TensorFlow 2.4 API and the TensorFlow Probability 0.12 API together
 with the scraper and conversion script used to generate it.
 
 Intersphinx Usage
 -----------------
 
-Add the following line inside your Sphinx Intersphinx configuration:
-``"tensorflow": ("https://www.tensorflow.org/api_docs/python", "https://github.com/mr-ubik/tensorflow-intersphinx/raw/master/tf2_py_objects.inv")``
+To enable these intersphinx inventories in your Sphinx documentation, add the following items inside the ``intersphinx_mapping`` dictionary in your Sphinx configuration (*conf.py*).
+
+For TensorFlow,
+
+* GitHub-hosted:
+
+  .. code:: python
+
+      "tensorflow": ("https://www.tensorflow.org/api_docs/python", "https://github.com/GPflow/tensorflow-intersphinx/raw/master/tf2_py_objects.inv")
+
+* local copy (relative to *conf.py*):
+
+  .. code:: python
+
+      "tensorflow": ("https://www.tensorflow.org/api_docs/python", "tf2_py_objects.inv")
+
+For TensorFlow Probability,
+
+* GitHub-hosted:
+  
+  .. code:: python
+      
+      "tensorflow_probability": ("https://www.tensorflow.org/probability/api_docs/python", "https://github.com/GPflow/tensorflow-intersphinx/raw/master/tfp_py_objects.inv")
+
+* local copy (relative to *conf.py*):
+
+  .. code:: python
+
+      "tensorflow_probability": ("https://www.tensorflow.org/probability/api_docs/python", "tfp_py_objects.inv")
 
 **Example**
 
@@ -21,30 +48,44 @@ Add the following line inside your Sphinx Intersphinx configuration:
 
     # Example configuration for intersphinx: refer to the Python standard library.
     intersphinx_mapping = {
-        "flask": ("http://flask.pocoo.org/docs/1.0/", None),
-        "numpy": ("https://docs.scipy.org/doc/numpy/", None),
-        "python": ("https://docs.python.org/", None),
+        "numpy": ("https://numpy.org/doc/stable/", None),
+        "python": ("https://docs.python.org/3/", None),
         "tensorflow": (
             "https://www.tensorflow.org/api_docs/python",
-            "https://github.com/mr-ubik/tensorflow-intersphinx/raw/master/tf2_py_objects.inv",
+            "https://github.com/GPflow/tensorflow-intersphinx/raw/master/tf2_py_objects.inv"
+        ),
+        "tensorflow_probability": (
+            "https://www.tensorflow.org/probability/api_docs/python",
+            "https://github.com/GPflow/tensorflow-intersphinx/raw/master/tfp_py_objects.inv"
         ),
     }
 
-Installation
-------------
 
-Inside a virtual environment run ``pip install scrapy sphobjinv``
+Find the correct reference
+--------------------------
 
-DIY
----
+You can view the contents of the inventories by running
+``python -msphinx.ext.intersphinx tf2_py_objects.inv``
+or
+``python -msphinx.ext.intersphinx tfp_py_objects.inv``
+The output is separated into classes, functions, and modules.
 
-* After installation:
+Regenerate the Sphinx Inventories
+---------------------------------
 
-``cd tf_docs_scraper && scrapy crawl tf_docs -o core_symbols.json``
+* Install dependencies:
+  ``pip install -r requirements.in``
+* After installation, run the scraper (make sure to delete old versions of the json files first, ``rm -f tf_docs_scraper/core_symbols.json tf_docs_scraper/core_symbols_tfp.json``):
+  ``cd tf_docs_scraper && scrapy crawl tf_docs -o core_symbols.json && cd ..`` (TensorFlow)
+  ``cd tf_docs_scraper && scrapy crawl tfp_docs -o core_symbols_tfp.json && cd ..`` (TensorFlow Probability)
+* After the scraping process finishes:
+  ``python inventipy.py``
 
-* After the scraping process finish:
+These steps can be run all-in-one using the ``regenerate.sh`` shell script.
 
-``cd .. && python inventipy.py``
+Note that the TensorFlow and TensorFlow Probability versions (displayed as part
+of the intersphinx links in your docs) are hard-coded in ``inventipy.py``, and
+have to be updated in there as required.
 
 Contributing
 ------------
