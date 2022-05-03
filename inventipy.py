@@ -74,14 +74,14 @@ def add_to_inventory(inv, symbol, common_url):
 if __name__ == "__main__":
     main(
         project="TensorFlow",
-        version="2.4",  # UPDATE as required
+        version="2.8",  # UPDATE as required
         symbols_file="./tf_docs_scraper/core_symbols.json",
         common_url="https://www.tensorflow.org/api_docs/python/",
         inv_file="tf2_py_objects.inv",
     )
     main(
         project="TensorFlow Probability",
-        version="0.12",  # UPDATE as required
+        version="0.16",  # UPDATE as required
         symbols_file="./tf_docs_scraper/core_symbols_tfp.json",
         common_url="https://www.tensorflow.org/probability/api_docs/python/",
         inv_file="tfp_py_objects.inv",
