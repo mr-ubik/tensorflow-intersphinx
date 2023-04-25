@@ -73,7 +73,7 @@ jmespath==1.0.1
     # via itemloaders
 jsonschema==3.0.2
     # via sphobjinv
-lxml==4.4.1
+lxml==4.9.1
     # via
     #   parsel
     #   scrapy
