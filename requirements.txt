@@ -15,7 +15,7 @@ attrs==19.2.0
     #   service-identity
     #   sphobjinv
     #   twisted
-automat==0.7.0
+automat==22.10.0
     # via twisted
 black==19.3b0
     # via -r requirements.in
@@ -59,7 +59,7 @@ idna==2.8
     #   hyperlink
     #   requests
     #   tldextract
-incremental==17.5.0
+incremental==22.10.0
     # via twisted
 isort==4.3.21
     # via -r requirements.in
@@ -105,8 +105,6 @@ pydispatcher==2.0.5
     # via scrapy
 pyflakes==2.1.1
     # via flake8
-pyhamcrest==1.9.0
-    # via twisted
 pyopenssl==23.0.0
     # via scrapy
 pyparsing==2.4.2
@@ -132,7 +130,6 @@ six==1.12.0
     #   packaging
     #   parsel
     #   protego
-    #   pyhamcrest
     #   pyrsistent
     #   requests-file
     #   w3lib
@@ -142,12 +139,14 @@ tldextract==3.4.0
     # via scrapy
 toml==0.10.0
     # via black
-twisted==19.7.0
+twisted==22.10.0
     # via scrapy
 typed-ast==1.4.0
     # via mypy
 typing-extensions==3.7.4
-    # via mypy
+    # via
+    #   mypy
+    #   twisted
 urllib3==1.26.14
     # via requests
 w3lib==1.21.0
