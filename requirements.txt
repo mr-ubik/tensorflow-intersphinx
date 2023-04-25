@@ -19,7 +19,7 @@ automat==0.7.0
     # via twisted
 black==19.3b0
     # via -r requirements.in
-certifi==2019.9.11
+certifi==2022.12.7
     # via
     #   requests
     #   sphobjinv
